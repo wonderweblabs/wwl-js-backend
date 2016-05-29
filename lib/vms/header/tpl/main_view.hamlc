@@ -1,0 +1,8 @@
+%a.logout{href: @logout_href}
+  %i{class: @logout_icon}
+  = @logout_title
+
+%a.user-name{href: @user_name_href}
+  %i{class: @user_name_icon}
+  = @user_name
+

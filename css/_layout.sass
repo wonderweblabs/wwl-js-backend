@@ -1,19 +1,29 @@
-body.wwl-js-backend
-  background-color: #444
-.wwl-js-vm-modals
-  +position(fixed, 0 0 0 0)
-  +user-select(none)
-  display: none
-  margin: 0
-  padding: 0
-  pointer-events: none
+.wwl-js-backend
 
-.wwl-js-vm-modals-modal
-  +position(absolute, 0 0 0 0)
-  +user-select(none)
-  background-color: rgba(#000, .4)
-  margin: 0
-  padding: 0
-  pointer-events: all
+  .wwl-backend-wrapper
+    position: relative
+    z-index: 1
+    min-width: 1000px
+    width: 100%
+    min-height: 500px
+    height: 100%
+    margin: 0
+    padding: 0
+    overflow: hidden
+    background-color: #3A3A3A
 
-.wwl-js-vm-modals-modal-content
+  aside
+    position: absolute
+    top: 0
+    right: auto
+    bottom: 0
+    left: 0
+    width: 200px
+
+  main
+    position: absolute
+    top: 0
+    right: 0
+    bottom: 0
+    left: 200px
+    min-width: 800px

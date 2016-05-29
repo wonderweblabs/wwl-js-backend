@@ -12,13 +12,28 @@ domready    = require 'domready'
 wwlContext  = require 'wwl-js-app-context'
 
 domready ->
+  context = new (wwlContext)({ root: true })
+
   tester = new (require('wwl-js-vm')).Tester({
 
     domElementId: 'wwl-js-vm-tester-container'
 
     config:
       getDefaultVMConfig: ->
-        context: new (wwlContext)({ root: true })
+        context: context
+        navigation_items_collection: new (require('../lib/collections/navigation_items_collection'))([{
+            id: 'dashboard'
+            title: 'Dashboard'
+            icon: 'mdi mdi-view-dashboard'
+            href: '#/dashboard'
+            active: true
+          },{
+            id: 'home'
+            title: 'Home'
+            href: '#/home'
+            icon: 'mdi mdi-view-home'
+            active: false
+          }])
 
     vmConfig: _.extend({
 
@@ -28,9 +43,20 @@ domready ->
 
       afterStart: (vm, moduleConfig) ->
         window.vm = vm
-        console.log 'VM', vm
 
-      vmPrototype: require('../lib/vm')
+        Backbone.listenTo vm, 'click', (event, model, vm)=>
+          console.log 'click', model.id
+          vm.setActiveNavigationItem(model.id)
+
+        vm.setHeaderVM(
+          new (require('../lib/vms/header/vm'))({
+            context: context,
+            user_name: 'Niels Wonderweblabs'
+            user_name_href: '#/test'
+          })
+        )
+
+      vmPrototype: require('../lib/vms/main/vm')
 
     }, require('./vm_config'))
 

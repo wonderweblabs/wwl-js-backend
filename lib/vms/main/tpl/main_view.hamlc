@@ -1,0 +1,7 @@
+.wwl-backend-wrapper
+  %aside
+    %nav.aside-nav
+  %main
+    %header
+    .content
+      .inside
