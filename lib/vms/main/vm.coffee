@@ -7,6 +7,10 @@ module.exports = class Vm extends require('wwl-js-vm').VM
     super(options)
 
     @_navigationItemsCollection = options.navigation_items_collection
+    @_model = new (require('./models/ui'))({
+      logo_src: options.logo_src
+      logo_href: options.logo_href
+    })
 
   getNavigationItemsCollection: =>
     @_navigationItemsCollection or= @_buildDefaultNavigationItemsCollection()
@@ -20,6 +24,16 @@ module.exports = class Vm extends require('wwl-js-vm').VM
   setBodyVM: (bodyVM)=>
     @getView().body.show(bodyVM.getView())
 
+  getMainViewOptions: =>
+    {
+      context: @context
+      vm: @
+      model: @_getModel()
+    }
+
+  _getModel: =>
+    @_model
+
   _buildDefaultNavigationItemsCollection: =>
     new (require('../../collections/navigation_items_collection'))([{
       id: 'dashboard'
@@ -28,10 +42,4 @@ module.exports = class Vm extends require('wwl-js-vm').VM
       href: '/dashboard'
       active: true
     }])
-
-  getMainViewOptions: =>
-    {
-      context: @context
-      vm: @
-    }
 

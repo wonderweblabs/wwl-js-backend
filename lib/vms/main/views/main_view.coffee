@@ -12,6 +12,8 @@ module.exports = class MainView extends require('backbone.marionette').LayoutVie
   onRender: =>
     @asideNav.show(@_getAsideNavView())
 
+    console.log @model
+
   _getAsideNavView: =>
     @_asideView or= new (require('./aside_nav_view'))({
       collection: @options.vm.getNavigationItemsCollection()

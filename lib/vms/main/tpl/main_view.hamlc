@@ -1,5 +1,8 @@
 .wwl-backend-wrapper
   %aside
+    - if @logo_src?
+      %a.logo{href: @logo_href}
+        %img{src: @logo_src}
     %nav.aside-nav
   %main
     %header
